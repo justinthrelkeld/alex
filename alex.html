@@ -19,4 +19,55 @@
 	<input type="text" name="books_to_input">
 	<input type="submit">
 </form>
+{{books.count}}
+<ul>
+{{#each books}}
+<li>
+	<a href="/b/{{googleId}}">{{title}}</a> ({{googleId}})—
+	{{#each authors}}{{#if @index}}, {{/if}}{{this}}{{/each}}
+	<button class="delete_book">delete</button>
+	<ul>
+		{{#each copies}}
+		<li>{{owner}} - {{status}}</li>
+		{{/each}}
+	</ul>
+	<hr>
+</li>
+{{/each}}
+
+</ul>
+<hr>
+<ol>
+{{#each booksResearch}}
+<li>
+	<img src="{{imageLinks.thumbnail}}" alt="">
+	<a href="{{infoLink}}" target="_blank">{{title}}</a> —
+	{{#each authors}}{{#if @index}}, {{/if}}{{this}}{{/each}}
+	{{description}}
+	<button class="choose_book">this one</button>
+</li>
+{{/each}}
+
+</ol>
+</template>
+
+<template name="book_detail">
+
+  <h2>{{title}}</h2>
+  {{#each authors}}{{#if @index}}, {{/if}}{{this}}{{/each}}
+  <img src="{{imageLinks.thumbnail}}" alt="" />
+  <p>
+    {{description}}
+  </p>
+  <a href="{{infoLink}}" target="_blank">more info</a>
+  <button type="button" name="checkout--begin" class="book__checkout--begin">checkout</button>
+  <button type="button" name="request" class="book__request">request it</button>
+
+<hr>
+  <h3>Copies</h3>
+  <ul>
+    {{#each copies}}
+    <li>{{owner}}: {{location}} — {{status}}</li>
+    {{/each}}
+  </ul>
 </template>
